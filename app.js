@@ -3,22 +3,26 @@ function sortear(){
         let quantidade = parseInt(document.getElementById("quantidade").value);
         let de = parseInt(document.getElementById("de").value);
         let ate = parseInt(document.getElementById("ate").value);
+
+        if(ate >= (de + quantidade - 1)){
+            let sorteados = [];
+            let numero;
     
-       let sorteados = [];
-        let numero;
-
-        for(let i = 0; i < quantidade; i++) {
-            numero = numeroAleatorio(de, ate);
-            while(sorteados.includes(numero)){
+            for(let i = 0; i < quantidade; i++) {
                 numero = numeroAleatorio(de, ate);
+                while(sorteados.includes(numero)){
+                    numero = numeroAleatorio(de, ate);
+                }
+                sorteados.push(numero);
             }
-            sorteados.push(numero);
-     }
-
-        let resultado = document.getElementById("resultado");
-        resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados:  ${sorteados}</label>`;
-        alterarBotao("btn-reiniciar");
-        alterarBotao("btn-sortear");
+    
+            let resultado = document.getElementById("resultado");
+            resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados:  ${sorteados}</label>`;
+            alterarBotao("btn-reiniciar");
+            alterarBotao("btn-sortear");
+        } else {
+            alert("Verifique os valores inseridos");
+        }
     }
 }
 
